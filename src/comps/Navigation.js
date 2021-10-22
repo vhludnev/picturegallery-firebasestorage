@@ -43,7 +43,9 @@ const Wrapper = styled.div`
 	grid-column-gap: 20px;
 	margin: 40px 0;
 	button {
-		padding: 0 10px;
+		cursor: pointer;
+		min-width: 50px;
+		/* padding: 0 10px; */
 		background: var(--primary);
 		border: none;
 		border-radius: 10%;

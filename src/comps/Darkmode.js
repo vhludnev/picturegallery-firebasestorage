@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useUpdate } from '../contexts/UpdateContext';
 
 const Darkmode = () => {
-	const { btnState, setBtnState } = useUpdate();
+	const { btnState, toggleBtnState } = useUpdate();
 
 	let size = getComputedStyle(document.body).getPropertyValue('--light_radio_button_size').split("px")[0]
 	
@@ -20,7 +20,7 @@ const Darkmode = () => {
   };
 
 const handleClick = () => {
-	setBtnState(prev => !prev);
+	toggleBtnState();
   if (btnState) {
     document.body.style.background = 'url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/782173/dark_grain.png")';
 		document.body.style.color = 'lightgrey';

@@ -1,11 +1,11 @@
-# ReactJs + FIrebase photo storage/gallery
+# ReactJs + Firebase photo storage/gallery
 
 ## Key Features
 
 * ReactJs
 * Works on mobile and desktop devices
-* Firebase sorage
+* Firebase storage
 * Firebase Auth
-* Personal accounts with pictures' uploading and filtering
+* Personal accounts to upload and filter your pictures
 
-[Check demo](https://yourpictures.web.app/)
+[Check demo](https://gallerygramapp.web.app)

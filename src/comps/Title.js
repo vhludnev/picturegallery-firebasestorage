@@ -1,10 +1,14 @@
-import React from 'react';
-import Login from './Login';
-import UpdateProfile from './Update';
+import React, { lazy } from 'react';
+//import Login from './Login';
+//import UpdateProfile from './Update';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useUpdate } from '../contexts/UpdateContext';
+import WithSuspense from './withSuspense';
+
+const UpdateProfile = WithSuspense(lazy(() => import('./Update')));
+const Login = WithSuspense(lazy(() => import('./Login')));
 
 const Title = () => {
 	const { currentUser, logout } = useAuth()
@@ -22,7 +26,7 @@ const Title = () => {
 				<motion.button whileHover={{ scale: 1.1 }} onClick={currentUser ? logout : openPopup}>
 					{currentUser ? 'Logout' : 'Login'}
 				</motion.button>
-			</div>  		
+			</div>  	
 			<UpdateProfile />   
 			<Login />
       <h2>Your Pictures </h2>
@@ -35,6 +39,7 @@ const Title = () => {
 export default Title;
 
 const Wrapper = styled.div`
+	position: relative;
 	text-align: center;
   .header {
 		padding-top: 1rem;

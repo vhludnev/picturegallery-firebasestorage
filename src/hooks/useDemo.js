@@ -4,20 +4,20 @@ import axios from 'axios';
 const useDemo = (count, elemsTotal = 1085, elemsPage = 24) => {
   const [images, setImages] = useState([]);
 	//const [error, setError] = useState(false);
-	//const [loading, setLoading] = useState(true);
-
+	//const [isLoading, setIsLoading] = useState(true);
+	
 	const ax = async(url) => {
 		try {
 			const picsData = await axios(url)
-				/* setLoading(false);
-				setError(false); */
+				//setIsLoading(false);
+				/* setError(false); */
 				return {
 					id: +picsData.data.id,
 					url_full: picsData.data.url,
 					download_url: picsData.data.download_url,
 					url: `https://picsum.photos/id/${picsData.data.id}/300`
 				}
-		} catch (err) {/* setError(err.message); setLoading(false) */}
+		} catch (err) {/* setError(err.message); */}
 	}
 
 	const replacedUndefined = useCallback(() => {	
@@ -29,16 +29,18 @@ const useDemo = (count, elemsTotal = 1085, elemsPage = 24) => {
 		}
 	},[elemsTotal])
 
+
 	useEffect(() => {
-		const ids = [...Array(elemsTotal).keys()]
+		//setIsLoading(true)
+		const ids = [...Array(elemsTotal).keys()]/* .map(() => Math.floor(Math.random() * elemsTotal) + 1) */;
 		const requests = ids.slice(count, count > ids.length - elemsPage ? ids.length : count + elemsPage).map(async id => {
 			let abc = `https://picsum.photos/id/${id}/info`
 			return await ax(abc)
 		})
-		return Promise.all(requests).then( data => setImages(data.map(item => item === undefined ? replacedUndefined() : item))	); // remove 'undefined' 
+		return Promise.all(requests).then( data => setImages(data.map(item => item === undefined ? replacedUndefined() : item)))/* .then(() => setIsLoading(false)).catch(() => setIsLoading(false)) */; // remove 'undefined' 
 	}, [count, elemsPage, elemsTotal, replacedUndefined]); 
 	
-	return { images, elemsTotal, elemsPage/* , error, loading */ };
+	return { images, elemsTotal, elemsPage/* , isLoading */ /* , error */  };
 }
 
 export default useDemo;

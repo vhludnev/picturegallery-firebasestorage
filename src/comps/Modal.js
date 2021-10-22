@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { MdDeleteForever } from 'react-icons/md';
-import { projectFirestore } from '../firebase/config';
+import { projectFirestore, projectStorage } from '../firebase/config';
 import { useAuth } from '../contexts/AuthContext';
 import { useUpdate } from '../contexts/UpdateContext';
 
 const Modal = () => {
 	const { currentUser } = useAuth();
-	const { selectedImg, setSelectedImg, selectedImgUid} = useUpdate();
+	const { selectedImg, setSelectedImg, selectedImgUid } = useUpdate();
 
   const handleClick = (e) => {
     if (e.target.classList.contains('wrapper')) {	// closes only if clicked outside the image
@@ -20,9 +20,11 @@ const Modal = () => {
 		projectFirestore.collection('images').get().then((querySnapshot) => {
 			querySnapshot.forEach((doc) => {
 				if(doc.data().url === selectedImg && doc.data().uid === currentUser.uid) {
-					let imgIdToDelete = doc.id
-					projectFirestore.collection('images').doc(imgIdToDelete).delete()
-				}
+					const imgIdToDelete = doc.id,
+								storageRefUrl = projectStorage.refFromURL(doc.data().url);
+					projectFirestore.collection('images').doc(imgIdToDelete).delete().then(() => console.log(imgIdToDelete, ' has been erased')).catch(err => console.log('there was an error: ', err));
+					projectStorage.ref(storageRefUrl.fullPath).delete().then(() => console.log(storageRefUrl.name, ' deleted')).catch(err => console.log('there was an error: ', err));
+}
 				ModalClosure();
 			});
 		})
@@ -88,6 +90,9 @@ const DeleteModalButton = styled(MdDeleteForever)`
   z-index: 10;
 	&:hover {
 		color: salmon;
+	}
+	path {
+		pointer-events: none;
 	}
 	@media (max-width: 992px) {
 		right: 0;

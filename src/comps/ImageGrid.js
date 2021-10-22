@@ -1,11 +1,17 @@
-import React from 'react';
+import React/* , { useEffect } */ from 'react';
 import { useUpdate } from '../contexts/UpdateContext';
 import useDemo from '../hooks/useDemo';
 import Images from './Images';
 
 const ImageGrid = () => {
 	const { count } = useUpdate();
-	const { images } = useDemo(count);
+	const { images/* , isLoading  */} = useDemo(count);
+
+	//console.log('Demo: ', isLoading)
+
+	// useEffect(() => {
+	// 	setIsLoading(true)
+  // }, [setIsLoading])
 
   return (
     <>

@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect/* , useState */ } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useUpdate } from '../contexts/UpdateContext';
+import Spinner from './Spinner';
 
 const Images = ({ img }) => {
 	const { currentUser } = useAuth();
 	const { handleClick, setDisabled } = useUpdate();
+	//const [loading, setLoading] = useState(true)
 
+	//console.log((loading))
 	useEffect(() => {
 		setDisabled(false)
 	}, [setDisabled])
@@ -23,6 +26,7 @@ const Images = ({ img }) => {
 				effect='blur'
 				height='300'
 				width='300'
+				placeholder={<Spinner/>}
 			/>
 		</ImageWrapper> 
 	)

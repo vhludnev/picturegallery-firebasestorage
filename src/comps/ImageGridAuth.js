@@ -4,10 +4,12 @@ import { useUpdate } from '../contexts/UpdateContext';
 import Images from './Images';
 
 const ImageGridAuth = () => {
-  const { docs } = useFirestore('images');
+  const { docs/* , isLoading */ } = useFirestore('images');
 	const { countA, docsFilter } = useUpdate();
 
 	let docsToRender = [...docsFilter.slice(countA, countA > docs.length - 12 ? docs.length : countA + 12)]
+
+	//console.log('Auth: ', isLoading)
 
   return (
     <>

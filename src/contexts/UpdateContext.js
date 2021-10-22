@@ -16,6 +16,7 @@ export const UpdateProvider = ({ children }) => {
 	const [btnState, setBtnState] = useState(true);
 	const [count, setCount] = useState(0);
 	const [countA, setCountA] = useState(0);
+	//const [isLoading, setIsLoading] = useState(false);
 	const { elemsTotal, elemsPage } = useDemo(count);
 	const { docs } = useFirestore('images');
 	const [ disabled, setDisabled ] = useState(false);
@@ -43,8 +44,7 @@ export const UpdateProvider = ({ children }) => {
 				countA < docsFilter.length - elemsPage/2 ? setCountA(countA + elemsPage/2) && setDisabled(true) : setCountA(countA);
 			}
 			setDisabled(true)
-		}		
-		
+		}				
 	}
 
 	const handleChange = () => {
@@ -73,18 +73,25 @@ export const UpdateProvider = ({ children }) => {
     setShowModal2(prev => !prev);
   };
 
+	const toggleBtnState = () => {
+		setBtnState(prev => !prev);
+	}
+
+	const resetCountA = () => {
+		setCountA(0)
+	}
+
 	useEffect(() => {
 		return () => { setCount(0); setCountA(0) }
 	}, [currentUser])
 
 	const value = {
-    selectedImg,
-		setSelectedImg,
+    selectedImg, setSelectedImg,
 		handleClick,
 		openPopup, openPopup2,
 		showModal, setShowModal,
-		showModal2, setShowModal2, LeftClick, RightClick, count, countA, disabled, setDisabled, handleNumChange, docsFilter,
-		handleChange, checked, selectedImgUid, btnState, setBtnState
+		showModal2, setShowModal2, LeftClick, RightClick, count, countA, resetCountA, disabled, setDisabled, handleNumChange, docsFilter,
+		handleChange, checked, selectedImgUid, btnState, toggleBtnState
   }
 
 	return (

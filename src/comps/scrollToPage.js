@@ -29,6 +29,7 @@ const ScrollToPage = () => {
 export default ScrollToPage;
 
 const Wrapper = styled.select`
+	cursor: pointer;
 	min-width: 50px;
 	font-family: var(--font_family);
 	font-weight: 700;
