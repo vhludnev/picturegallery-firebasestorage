@@ -5,12 +5,6 @@ const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
 	//const [isLoading, setIsLoading] = useState(true)
 	//const [error, setError] = useState(false)
-
-
-	// const onError = () => {
-  //   setError(true);
-	// 	setLoading(false);
-  // };
 	
   useEffect(() => {
     const unsub = projectFirestore.collection(collection)

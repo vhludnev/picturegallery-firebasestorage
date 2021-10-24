@@ -14,21 +14,20 @@ const useDemo = (count, elemsTotal = 1085, elemsPage = 24) => {
 				return {
 					id: +picsData.data.id,
 					url_full: picsData.data.url,
-					download_url: picsData.data.download_url,
-					url: `https://picsum.photos/id/${picsData.data.id}/300`
+					url: picsData.data.download_url,
+					preview_url: `https://picsum.photos/id/${picsData.data.id}/300`
 				}
 		} catch (err) {/* setError(err.message); */}
-	}
+	};
 
 	const replacedUndefined = useCallback(() => {	
 		return	{	
 			id: Math.floor(Math.random() * (1250 - elemsTotal + 1)) + elemsTotal,
 			url_full: 'https://storage.googleapis.com/orchestra-cafe-7jp1kqsp/uploads/sites/47/2018/06/IMG_1791-768x624.jpg',
-			download_url: 'https://storage.googleapis.com/orchestra-cafe-7jp1kqsp/uploads/sites/47/2018/06/IMG_1791-768x624.jpg',
-			url: 'https://www.noahubs.de/media/image/7b/71/ba/SorryNoPicQ2RbvqidfEJGI.jpg'	
+			url: 'https://storage.googleapis.com/orchestra-cafe-7jp1kqsp/uploads/sites/47/2018/06/IMG_1791-768x624.jpg',
+			preview_url: 'https://www.noahubs.de/media/image/7b/71/ba/SorryNoPicQ2RbvqidfEJGI.jpg'	
 		}
-	},[elemsTotal])
-
+	},[elemsTotal]);
 
 	useEffect(() => {
 		//setIsLoading(true)

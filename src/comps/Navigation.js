@@ -13,23 +13,21 @@ const Navigation = () => {
 		const firstNumber = (count+elemsPage)/elemsPage,
 					secondNumber = Math.ceil(elemsTotal/elemsPage);
 		return <div>{firstNumber}/{secondNumber}</div>
-	},[])
+	},[]);
 
 	useEffect(() => {
-		if (!currentUser && count === 0 && count > (elemsTotal - elemsPage)) {
+		if (!currentUser && (count === 0 || count > (elemsTotal - elemsPage))) {
 			return setDisabled(false)
 		} else if (currentUser && (countA === 0 || countA > (docsFilter.length - elemsPage / 2 ))) {
 			return setDisabled(false)
-		} else {
-			return disabled
 		}
-	})
+	});
 
 	return (
 		<Wrapper className="navigation">
-			<button disabled={false} onClick={LeftClick} id='left'>Left</button>
+			<button disabled={disabled} onClick={LeftClick} id='left'>Left</button>
 			{currentUser ? Func(countA, elemsPage / 2, docsFilter.length) : Func(count, elemsPage, elemsTotal)}
-			<button disabled={false} onClick={RightClick} id='right'>Right</button>
+			<button disabled={disabled} onClick={RightClick} id='right'>Right</button>
 		</Wrapper>
 	)
 }

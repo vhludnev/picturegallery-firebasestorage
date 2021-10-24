@@ -6,8 +6,8 @@ const AuthContext = React.createContext()
 export const useAuth = () => useContext(AuthContext)
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
 	const login = (email, password) => auth.signInWithEmailAndPassword(email, password)
   const logout = () => auth.signOut()
@@ -21,10 +21,11 @@ export const AuthProvider = ({ children }) => {
 			setLoading(false)  
     })
     return () => unsubscribe()
-  }, [])
+  }, []);
 
   const value = {
     currentUser,
+		loading, setLoading,
     login,
     logout, 
 		updateEmail,

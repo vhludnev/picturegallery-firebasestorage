@@ -1,28 +1,24 @@
-import React, { useEffect/* , useState */ } from 'react';
+import React, { useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useAuth } from '../contexts/AuthContext';
 import { useUpdate } from '../contexts/UpdateContext';
 import Spinner from './Spinner';
 
-const Images = ({ img }) => {
-	const { currentUser } = useAuth();
+const Images = ({ src, clickData, imgAlt }) => {
 	const { handleClick, setDisabled } = useUpdate();
-	//const [loading, setLoading] = useState(true)
 
-	//console.log((loading))
 	useEffect(() => {
 		setDisabled(false)
-	}, [setDisabled])
+	}, [setDisabled]);
 
 	return (
 		<ImageWrapper
 			layout /* animates the appearing of a block of newly added image */
 			whileHover={{ opacity: 1 }}
-			onClick={() => { currentUser ? handleClick(img.url, img.uid) : handleClick(img.download_url) }}
+			onClick={() => { handleClick(clickData) }}
 		>
-			<Image src={img.url} alt={currentUser ? 'uploaded pic' : `pic${img.id}`} /* adding fadein effect for the appearing of new images */
+			<Image src={src} alt={imgAlt} /* adding fadein effect for the appearing of new images */
 				effect='blur'
 				height='300'
 				width='300'

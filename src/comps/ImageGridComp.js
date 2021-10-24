@@ -1,15 +1,13 @@
 import React, { lazy } from 'react';
 import styled from 'styled-components';
+import { useAuth } from '../contexts/AuthContext';
 import ImageGrid from './ImageGrid';
 // import ImageGridAuth from './ImageGridAuth';
-import { useAuth } from '../contexts/AuthContext';
 //import Modal from './Modal';
 import Navigation from './Navigation';
 import ScrollToPage from './scrollToPage';
-//import Spinner from './Spinner';
 import WithSuspense from './withSuspense';
 
-//const ImageGrid = WithSuspense(lazy(() => import('./ImageGrid')));
 const ImageGridAuth = WithSuspense(lazy(() => import('./ImageGridAuth')));
 const Modal = WithSuspense(lazy(() => import('./Modal')));
 

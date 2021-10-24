@@ -11,7 +11,7 @@ const UpdateProfile = WithSuspense(lazy(() => import('./Update')));
 const Login = WithSuspense(lazy(() => import('./Login')));
 
 const Title = () => {
-	const { currentUser, logout } = useAuth()
+	const { currentUser, logout } = useAuth();
 	const { openPopup, openPopup2 } = useUpdate();
 
   return (

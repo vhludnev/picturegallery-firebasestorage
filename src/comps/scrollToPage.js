@@ -14,7 +14,7 @@ const ScrollToPage = () => {
 								: [...Array(Math.ceil(docsFilter.length/(elemsPage/2))).keys()]
 
 	let value = !currentUser ? (count+elemsPage)/elemsPage : (countA + elemsPage / 2)/(elemsPage/2)
-	
+
 	return (
 		<Wrapper className="scroll" value={value-1} onChange={handleNumChange} >
 			{pages.length > 0 && pages.map((item, i) => {

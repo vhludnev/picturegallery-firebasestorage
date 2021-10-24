@@ -1,21 +1,19 @@
-import React  from 'react';
-import useFirestore from '../hooks/useFirestore';
+import React from 'react';
 import { useUpdate } from '../contexts/UpdateContext';
+import useFirestore from '../hooks/useFirestore';
 import Images from './Images';
 
 const ImageGridAuth = () => {
-  const { docs/* , isLoading */ } = useFirestore('images');
 	const { countA, docsFilter } = useUpdate();
+  const { docs } = useFirestore('images');
 
-	let docsToRender = [...docsFilter.slice(countA, countA > docs.length - 12 ? docs.length : countA + 12)]
-
-	//console.log('Auth: ', isLoading)
+	let docsToRender = [...docsFilter.slice(countA, countA > docs.length - 12 ? docs.length : countA + 12)];
 
   return (
-    <>
+    <> 
       {docs && docsToRender.map(doc => (
 				<React.Fragment key={doc.id}>
-					<Images img={doc} />
+					<Images src={doc.url} clickData={doc} imgAlt={'uploaded pic'} />
 				</React.Fragment>
       ))}
     </>

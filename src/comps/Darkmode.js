@@ -5,7 +5,7 @@ import { useUpdate } from '../contexts/UpdateContext';
 const Darkmode = () => {
 	const { btnState, toggleBtnState } = useUpdate();
 
-	let size = getComputedStyle(document.body).getPropertyValue('--light_radio_button_size').split("px")[0]
+	let size = getComputedStyle(document.body).getPropertyValue('--light_radio_button_size').split("px")[0];
 	
 	const myStyle1 = {
 		opacity: "0.9",

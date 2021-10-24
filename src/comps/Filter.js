@@ -5,7 +5,6 @@ import { useUpdate } from '../contexts/UpdateContext';
 const Filter = () => {
 	const { handleChange, checked } = useUpdate();
 
-	
 	return (
 		<Wrapper>
 			<div className="segmented-control">     

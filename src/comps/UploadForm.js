@@ -4,12 +4,13 @@ import { MdFileUpload } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import useFirestore from '../hooks/useFirestore';
-import ProgressBar from './ProgressBar';
+//import ProgressBar from './ProgressBar';
 //import Filter from './Filter';
 import Darkmode from './Darkmode';
 import WithSuspense from './withSuspense';
 
 //const Darkmode = lazy(() => import('./Darkmode'));
+const ProgressBar = lazy(() => import('./ProgressBar'));
 const Filter = WithSuspense(lazy(() => import('./Filter')));
 
 const UploadForm = () => {

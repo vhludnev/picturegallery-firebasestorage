@@ -17,7 +17,7 @@ const App = () => {
 				</AppWrapper>
 			</UpdateProvider>
 		</AuthProvider>
-  );
+  )
 }
 
 export default App;

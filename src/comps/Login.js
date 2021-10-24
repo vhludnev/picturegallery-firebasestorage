@@ -1,4 +1,4 @@
-import React, { useEffect,  useCallback, useRef, useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import { motion } from 'framer-motion';
@@ -7,9 +7,8 @@ import { useUpdate } from '../contexts/UpdateContext';
 
 const Login = () => {
 	const [error, setError] = useState('');
-	const [loading, setLoading] = useState(false);
 	const modalRef = useRef();
-	const { login } = useAuth();
+	const { login, loading, setLoading } = useAuth();
 	const { showModal, setShowModal } = useUpdate();
 
 	const handleSubmit = async (e) => {
@@ -24,14 +23,15 @@ const Login = () => {
       setError('Failed to log in');
 		} 
     setLoading(false);
-  }
+  };
 
 	const cleanFields = () => {
 		return (
 			setShowModal(false),
 			setError('')
 		)
-	}
+	};
+	
 	const closeModal = (e) => {
     if (modalRef.current === e.target) {
       cleanFields();

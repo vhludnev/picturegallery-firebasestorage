@@ -14,7 +14,7 @@ const Modal = () => {
     if (e.target.classList.contains('wrapper')) {	// closes only if clicked outside the image
       ModalClosure();
     }
-  }
+  };
 
 	const handleDelete = () => {
 		projectFirestore.collection('images').get().then((querySnapshot) => {
@@ -24,17 +24,17 @@ const Modal = () => {
 								storageRefUrl = projectStorage.refFromURL(doc.data().url);
 					projectFirestore.collection('images').doc(imgIdToDelete).delete().then(() => console.log(imgIdToDelete, ' has been erased')).catch(err => console.log('there was an error: ', err));
 					projectStorage.ref(storageRefUrl.fullPath).delete().then(() => console.log(storageRefUrl.name, ' deleted')).catch(err => console.log('there was an error: ', err));
-}
+				}
 				ModalClosure();
 			});
 		})
-	}
+	};
 
 	const ModalClosure = () => {
 		setSelectedImg(null);
 		document.body.style.overflow = 'auto';
 		document.body.style.paddingRight = '0px';
-	}
+	};
 	
   return (
 		<>
@@ -48,7 +48,8 @@ const Modal = () => {
 					</div>
 				</BackdropWrapper>
 			)}
-  	</>)
+  	</>
+	)
 }
 
 export default Modal;

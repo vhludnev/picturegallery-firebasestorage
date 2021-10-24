@@ -16,13 +16,12 @@ export const UpdateProvider = ({ children }) => {
 	const [btnState, setBtnState] = useState(true);
 	const [count, setCount] = useState(0);
 	const [countA, setCountA] = useState(0);
-	//const [isLoading, setIsLoading] = useState(false);
+	const [disabled, setDisabled] = useState(false);
 	const { elemsTotal, elemsPage } = useDemo(count);
 	const { docs } = useFirestore('images');
-	const [ disabled, setDisabled ] = useState(false);
 	const { currentUser } = useAuth();
 
-	const docsFilter = currentUser && docs.filter(doc => checked ? doc : doc.uid === currentUser.uid)
+	const docsFilter = currentUser && docs.filter(doc => checked ? doc : doc.uid === currentUser.uid);
 
 	const LeftClick = () => {
 		if(!disabled) {
@@ -33,8 +32,7 @@ export const UpdateProvider = ({ children }) => {
 			}
 			setDisabled(true)
 		}
-		
-	}
+	};
 
 	const RightClick = () => {
 		if(!disabled) {
@@ -45,7 +43,7 @@ export const UpdateProvider = ({ children }) => {
 			}
 			setDisabled(true)
 		}				
-	}
+	};
 
 	const handleChange = () => {
     setChecked(prev => !prev);
@@ -58,11 +56,11 @@ export const UpdateProvider = ({ children }) => {
 
 	let padding = (window.innerWidth - document.body.clientWidth) + 'px';
 
-	const handleClick = (doc, uid = null) => {
+	const handleClick = (doc) => {
     document.body.style.overflow = 'hidden'; 
 		document.body.style.paddingRight = padding;
-		setSelectedImg(doc);
-		setSelectedImgUid(uid);
+		setSelectedImg(doc.url);
+		setSelectedImgUid(doc.uid);
   }
 
 	const openPopup = () => {
@@ -75,15 +73,15 @@ export const UpdateProvider = ({ children }) => {
 
 	const toggleBtnState = () => {
 		setBtnState(prev => !prev);
-	}
+	};
 
 	const resetCountA = () => {
 		setCountA(0)
-	}
+	};
 
 	useEffect(() => {
-		return () => { setCount(0); setCountA(0) }
-	}, [currentUser])
+		return () => { setCount(0); setCountA(0); /* setDisabled(false); setChecked(true) */ }
+	}, []);
 
 	const value = {
     selectedImg, setSelectedImg,
@@ -99,5 +97,4 @@ export const UpdateProvider = ({ children }) => {
 			{children}
 		</UpdateContext.Provider>
 	)
-
 }

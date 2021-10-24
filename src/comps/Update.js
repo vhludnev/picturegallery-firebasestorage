@@ -1,19 +1,19 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { MdClose } from 'react-icons/md';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
+import { MdClose } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useUpdate } from '../contexts/UpdateContext';
 
 const UpdateProfile = () => {
+	const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+	const modal_Ref = useRef();
 	const nameRef = useRef();
 	const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-	const modal_Ref = useRef();
   const { currentUser, updatePassword, updateEmail, updateProfile } = useAuth();
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 	const { showModal2, setShowModal2 } = useUpdate();
 
   const handleSubmit = (e) => {
@@ -47,14 +47,15 @@ const UpdateProfile = () => {
 				setError('')	
         setLoading(false)
       })
-  }
+  };
 
 	const cleanFields = () => {
 		return (
 			setShowModal2(false),
 			setError('')
 		)
-	}
+	};
+
 	const closeModal = (e) => {
     if (modal_Ref.current === e.target) {
       cleanFields()
